@@ -34,6 +34,7 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
             request={"session": session, "query_input": query_input}
         )
         return response.query_result.fulfillment_text
+    
 
 
 def start(update: Update, context: CallbackContext) -> None:
