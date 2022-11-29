@@ -23,6 +23,7 @@ PROJECT_ID=dflow-329614
 GOOGLE_APPLICATION_CREDENTIALS=dflow-361614-694810ee70a6.json
 NEW_INTENTS=""
 VK_TOKEN="vk1.a.-xrccnJWctU7lAnbe9-Cx43cbBMczQMx-U9L7sWgc5JHIv_MibxSFWpgE-Gkms149mR4tbDJJaJzBZ3oDJQ6Kcu7arg3S17NpSY6MbpKFsVG8UuVP91NRoi8j9ZA0ZoLJnj4Ek0DR0_UUSPJqV-7lIEUxs0z--TjJtigMtbNa87u0KSfqTo6kPShd7k2r-o6jDst0VPNSV
+CHAT_ID="79939547"
 ```
 
 - DEVMAN_TOKEN - токен в вашем личном кабинете [школы Devman](https://dvmn.org/api/docs/) 
@@ -30,6 +31,7 @@ VK_TOKEN="vk1.a.-xrccnJWctU7lAnbe9-Cx43cbBMczQMx-U9L7sWgc5JHIv_MibxSFWpgE-Gkms14
 - GOOGLE_APPLICATION_CREDENTIALS - путь до файла ``json`` c [ключом](https://cloud.google.com/docs/authentication/client-libraries)
 - NEW_INTENTS - путь до файла с обучающими фразами (если есть)
 - VK_TOKEN - [токен](https://vk.com/@articles_vk-token-groups?ysclid=lb26bno4x7379535242) из вашего сообщества VK
+- CHAT_ID= - ID чата в который будут приходить уведомление об ошибках бота
 
 ## Подключение DialogFlow
 

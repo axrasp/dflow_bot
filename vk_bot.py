@@ -68,7 +68,7 @@ def main():
                     if reply_text:
                         echo(event, vk_api, reply_text)
         except Exception as e:
-            logger.error('Возникла ошибка:')
+            logger.error('в ВК боте возникла ошибка: ')
             logger.error(e, exc_info=True)
             logger.warning('Перезапускаю бот')
             continue
