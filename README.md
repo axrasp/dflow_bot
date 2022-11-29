@@ -125,13 +125,39 @@ source venv/bin/activate
 
 ### Демонизация бота
 
-Создайте новый файл в папке ``/etc/systemd/system`` с названием ``your_bot_name.service`` c таким содержимым:
+#### VK
+Создайте новый файл в папке ``/etc/systemd/system`` с названием:
+``your_bot_name_vk.service`` для VK-бота c таким содержимым:
+
+```
+[Service]
+ExecStart=/opt/your_bot_name/venv/bin/python3 /opt/your_bot_name/vk_bot.py
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Добавляем бота в автозагрузку
+
+```commandline
+systemctl enable your_bot_name_vk
+```
+
+Запускаем бота:
+
+```commandline
+systemctl start your_bot_name_vk
+```
+
+#### Telegram
+Создайте новый файл в папке ``/etc/systemd/system`` с названием:
+``your_bot_name_tg.service`` для VK-бота c таким содержимым:
 
 ```
 [Service]
 ExecStart=/opt/your_bot_name/venv/bin/python3 /opt/your_bot_name/bot.py
-Restart=always
-ExecStart=/opt/your_bot_name/venv/bin/python3 /opt/your_bot_name/vk_bot.py
 Restart=always
 
 [Install]

@@ -16,6 +16,7 @@ Icon
 .Spotlight-V100
 .Trashes
 *.json
+.json
 # Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
