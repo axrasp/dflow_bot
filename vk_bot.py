@@ -24,12 +24,12 @@ def main():
     env.read_env()
     project_id = env.str("PROJECT_ID")
     vk_token = env.str("VK_TOKEN")
-    bot_token = env.str("TOKEN")
-    chat_id = env.str("CHAT_ID")
+    bot_token = env.str("TG_TOKEN")
+    tg_chat_id = env.str("TG_CHAT_ID")
 
     bot = Bot(bot_token)
     logger.setLevel(logging.WARNING)
-    logger.addHandler(TelegramLogsHandler(tg_bot=bot, chat_id=chat_id))
+    logger.addHandler(TelegramLogsHandler(tg_bot=bot, chat_id=tg_chat_id))
 
     while True:
         try:

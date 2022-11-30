@@ -2,11 +2,11 @@ import logging
 
 from environs import Env
 from google.cloud import dialogflow
-from telegram import Update, Bot
+from telegram import Bot, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
-from dflow_scripts import TelegramLogsHandler
 
+from dflow_scripts import TelegramLogsHandler
 
 logger = logging.getLogger('Logger')
 
@@ -30,7 +30,7 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
             request={"session": session, "query_input": query_input}
         )
         return response.query_result.fulfillment_text
-    
+
 
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
@@ -54,28 +54,22 @@ def send_df_reply(update: Update, context: CallbackContext) -> None:
 def main() -> None:
     env = Env()
     env.read_env()
-    bot_token = env.str("TOKEN")
-    chat_id = env.str("CHAT_ID")
+    bot_token = env.str("TG_TOKEN")
+    tg_chat_id = env.str("TG_CHAT_ID")
     updater = Updater(bot_token)
     bot = Bot(bot_token)
     logger.setLevel(logging.WARNING)
-    logger.addHandler(TelegramLogsHandler(tg_bot=bot, chat_id=chat_id))
+    logger.addHandler(TelegramLogsHandler(tg_bot=bot, chat_id=tg_chat_id))
     while True:
         try:
-            # Get the dispatcher to register handlers
             dispatcher = updater.dispatcher
 
-            # on different commands - answer in Telegram
             dispatcher.add_handler(CommandHandler("start", start))
 
-            # on non command i.e message - echo the message on Telegram
             dispatcher.add_handler(MessageHandler(
                 Filters.text & ~Filters.command, send_df_reply))
             # Start the Bot
             updater.start_polling()
-            # Run the bot until you press Ctrl-C or the process receives SIGINT,
-            # SIGTERM or SIGABRT. This should be used most of the time, since
-            # start_polling() is non-blocking and will stop the bot gracefully.
             updater.idle()
 
         except Exception as e:
