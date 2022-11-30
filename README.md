@@ -99,7 +99,7 @@ python3 bot_learning.py
 Запустите бот командой:
 
 ```
-python3 bot.py
+python3 tg_bot.py
 ```
 
 Запусите бота в телегамме ``/start``
@@ -162,7 +162,7 @@ systemctl start your_bot_name_vk
 
 ```
 [Service]
-ExecStart=/opt/your_bot_name/venv/bin/python3 /opt/your_bot_name/bot.py
+ExecStart=/opt/your_bot_name/venv/bin/python3 /opt/your_bot_name/tg_bot.py
 Restart=always
 
 [Install]
