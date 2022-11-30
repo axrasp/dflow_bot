@@ -5,6 +5,7 @@ from google.cloud import dialogflow
 from telegram import Update, Bot
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
+from dflow_scripts import TelegramLogsHandler
 
 
 logger = logging.getLogger('Logger')
@@ -43,13 +44,7 @@ def start(update: Update, context: CallbackContext) -> None:
     )
 
 
-def help_command(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /help is issued."""
-    update.message.reply_text("Help!")
-
-
-def echo(update: Update, context: CallbackContext) -> None:
-    """Echo the user message."""
+def send_df_reply(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(detect_intent_texts(
         project_id=context.user_data["project_id"],
         session_id=context.user_data["session_id"],
@@ -72,11 +67,10 @@ def main() -> None:
 
             # on different commands - answer in Telegram
             dispatcher.add_handler(CommandHandler("start", start))
-            dispatcher.add_handler(CommandHandler("help", help_command))
 
             # on non command i.e message - echo the message on Telegram
             dispatcher.add_handler(MessageHandler(
-                Filters.text & ~Filters.command, echo))
+                Filters.text & ~Filters.command, send_df_reply))
             # Start the Bot
             updater.start_polling()
             # Run the bot until you press Ctrl-C or the process receives SIGINT,
