@@ -42,11 +42,12 @@ def main():
                     reply_text = get_df_reply(
                         project_id=project_id,
                         session_id=event.user_id,
-                        texts=[event.text],
+                        text=[event.text],
                         language_code="ru-RU")
                     if reply_text:
                         send_vk_message(event, vk_api, reply_text)
         except Exception as e:
+            print(e)
             logger.error('в ВК боте возникла ошибка: ')
             logger.error(e, exc_info=True)
             logger.warning('Перезапускаю бот')

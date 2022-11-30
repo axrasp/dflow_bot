@@ -68,7 +68,6 @@ def main() -> None:
 
             dispatcher.add_handler(MessageHandler(
                 Filters.text & ~Filters.command, send_df_reply))
-            # Start the Bot
             updater.start_polling()
             updater.idle()
 
