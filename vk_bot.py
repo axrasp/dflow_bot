@@ -3,36 +3,15 @@ import random
 
 import vk_api as vk
 from environs import Env
-from google.cloud import dialogflow
 from telegram import Bot
 from vk_api.longpoll import VkEventType, VkLongPoll
 
-from bot import TelegramLogsHandler
+from dflow_scripts import TelegramLogsHandler, get_df_reply
 
 logger = logging.getLogger('Logger')
 
 
-def get_df_reply(project_id, session_id, texts, language_code):
-
-    session_client = dialogflow.SessionsClient()
-    session = session_client.session_path(project_id, session_id)
-
-    for text in texts:
-        text_input = dialogflow.TextInput(
-            text=text,
-            language_code=language_code
-        )
-
-        query_input = dialogflow.QueryInput(text=text_input)
-        response = session_client.detect_intent(
-            request={"session": session, "query_input": query_input}
-        )
-
-        if not response.query_result.intent.is_fallback:
-            return response.query_result.fulfillment_text
-
-
-def echo(event, vk_api, text):
+def send_vk_message(event, vk_api, text):
     vk_api.messages.send(
         user_id=event.user_id,
         message=text,
@@ -66,7 +45,7 @@ def main():
                         texts=[event.text],
                         language_code="ru-RU")
                     if reply_text:
-                        echo(event, vk_api, reply_text)
+                        send_vk_message(event, vk_api, reply_text)
         except Exception as e:
             logger.error('в ВК боте возникла ошибка: ')
             logger.error(e, exc_info=True)
