@@ -20,11 +20,9 @@ def get_df_reply(project_id, session_id, text, language_code):
     session = session_client.session_path(project_id, session_id)
 
     text_input = dialogflow.TextInput(
-        text=str(text),
+        text=text,
         language_code=language_code
     )
-    print(text_input)
-
     query_input = dialogflow.QueryInput(text=text_input)
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
