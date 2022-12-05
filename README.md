@@ -21,20 +21,20 @@ pip install -r requirements.txt
 Создайте файл ``.env`` и добавьте в него следующие данные вида:
 
 ```
-TOKEN=5662038928:AAEm652uxCui7HbiuKu7CKl1STF3faKpW3Q
-PROJECT_ID=dflow-329614
+TG_TOKEN=5662038928:AAEm652uxCui7HdiuKu7CKl1STF3faKpW3Q
+PROJECT_ID=dflow-309614
 GOOGLE_APPLICATION_CREDENTIALS=dflow-361614-694810ee70a6.json
-NEW_INTENTS_FILE_PATH=""
+NEW_INTENTS_FILE_PATH="intens.json"
 VK_TOKEN="vk1.a.-xrccnJWctU7lAnbe9-Cx43cbBMczQMx-U9L7sWgc5JHIv_MibxSFWpgE-Gkms149mR4tbDJJaJzBZ3oDJQ6Kcu7arg3S17NpSY6MbpKFsVG8UuVP91NRoi8j9ZA0ZoLJnj4Ek0DR0_UUSPJqV-7lIEUxs0z--TjJtigMtbNa87u0KSfqTo6kPShd7k2r-o6jDst0VPNSV
-CHAT_ID="79939547"
+TG_CHAT_ID="79939517"
 ```
 
-- DEVMAN_TOKEN - токен в вашем личном кабинете [школы Devman](https://dvmn.org/api/docs/) 
+- TG_TOKEN - Токен телеграм-бот, полученный в [BotFather](https://t.me/BotFather)
 - PROJECT_ID - Номер проекта в [Google Cloud ](https://console.cloud.google.com/)
 - GOOGLE_APPLICATION_CREDENTIALS - путь до файла ``json`` c [ключом](https://cloud.google.com/docs/authentication/client-libraries)
 - NEW_INTENTS_FILE_PATH - путь до файла с обучающими фразами (если есть)
 - VK_TOKEN - [токен](https://vk.com/@articles_vk-token-groups?ysclid=lb26bno4x7379535242) из вашего сообщества VK
-- CHAT_ID= - ID чата в который будут приходить уведомление об ошибках бота
+- TG_CHAT_ID - ID чата в который будут приходить уведомление об ошибках бота
 
 ## Подключение DialogFlow
 
@@ -172,13 +172,13 @@ WantedBy=multi-user.target
 Добавляем бота в автозагрузку
 
 ```commandline
-systemctl enable your_bot_name
+systemctl enable your_bot_name_tg
 ```
 
 Запускаем бота:
 
 ```commandline
-systemctl start your_bot_name
+systemctl start your_bot_name_tg
 ```
 
 Подробнее о systemd [здесь](https://www.freedesktop.org/software/systemd/man/systemd.service.html)
