@@ -15,7 +15,6 @@ class TelegramLogsHandler(logging.Handler):
 
 
 def get_df_reply(project_id, session_id, text, language_code):
-
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 
@@ -28,6 +27,5 @@ def get_df_reply(project_id, session_id, text, language_code):
         request={"session": session, "query_input": query_input}
     )
 
-    if not response.query_result.intent.is_fallback:
-        return response.query_result.fulfillment_text
-
+    return (response.query_result.intent.is_fallback,
+            response.query_result.fulfillment_text)

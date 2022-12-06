@@ -19,10 +19,12 @@ def start(update: Update, context: CallbackContext) -> None:
 
 
 def send_df_reply(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text(get_df_reply(
+    fallback, reply_text = get_df_reply(
         session_id=update.effective_user.id,
         project_id=context.bot_data["project_id"],
-        text=update.message.text, language_code="ru-RU"))
+        text=update.message.text, language_code="ru-RU")
+    if not fallback and reply_text:
+        update.message.reply_text(reply_text)
 
 
 def main() -> None:
