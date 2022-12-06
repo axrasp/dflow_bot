@@ -39,12 +39,12 @@ def main():
 
             for event in longpoll.listen():
                 if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-                    reply_text = get_df_reply(
+                    fallback, reply_text = get_df_reply(
                         project_id=project_id,
                         session_id=event.user_id,
                         text=[event.text],
                         language_code="ru-RU")
-                    if reply_text:
+                    if not fallback and reply_text:
                         send_vk_message(event, vk_api, reply_text)
         except Exception as e:
             logger.error('в ВК боте возникла ошибка: ')
